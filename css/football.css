@@ -1,0 +1,36 @@
+.bannerImage {
+    width: 100%;
+    height: 600px;
+}
+.bg-primary {
+    background-color: #5cb85c!important;
+    border-color: #5cb85c!important;
+}
+
+.panel-heading {
+    background-color: #5cb85c!important;
+    border-color: #5cb85c!important;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, 
+    .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+        background-color: #5cb85c!important;
+        border-color: #5cb85c!important;
+}
+
+@media screen and (min-width: 768px){
+    .bannerImage {
+        height: 600px;
+    }
+}
+
+@media screen and (min-width: 480px ) and (max-width: 767px){
+    .bannerImage {
+        height: 500px;
+    }
+}
+@media screen and (max-width: 480px){
+    .bannerImage {
+        height: 400px;
+    }
+}

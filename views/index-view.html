@@ -1,0 +1,211 @@
+<div class="container">
+    <h3 class="text-center text-uppercase"><strong>All matches statistics</strong></h3>
+    <hr>
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Matches
+                    <div class="pull-right">
+                         <button type="button" class="btn btn-default btn-xs" ng-click="allMatches.clearPrevValues()" data-toggle="modal" data-target="#dateModal"><span class="glyphicon glyphicon-filter"></span>
+                          Other Filters
+                        </button>
+                    </div>
+                </h3>
+            </div>
+            <div class="table-responsive">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6" style="padding-top: 20px;">
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Filter by any field" ng-model="searchText"/>
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-5 col-md-4 col-sm-6 col-xs-6" style="padding-top: 20px;">
+                    <button class="btn btn-default btn-md" ng-click="allMatches.showAndHide()"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-success btn-md" ng-show="allMatches.isFiltered" ng-click="allMatches.showUnfilteredList()">
+                      Display Unfiltered List
+                    </button>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-12 col-xs-12">
+                   <dir-pagination-controls
+                    max-size="6"
+                    direction-links="true"
+                    boundary-links="true" >
+                    </dir-pagination-controls>
+                </div>
+                
+                <!-- Date Picker Code Starts-->
+                <!-- Modal -->
+                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Filteration by Date, Month and Year</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form-horizontal">
+                                            <div class="col-md-3"><h5><strong>Date Filter:</strong></h5></div>
+                                            <div class="col-md-4">
+                                                <p class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        datepicker-popup="{{allMatches.format}}" 
+                                                        ng-model="allMatches.startDate" 
+                                                        is-open="allMatches.opened" 
+                                                        min-date="minDate" 
+                                                        max-date="'2020-06-22'" 
+                                                        datepicker-options="allMatches.dateOptions" 
+                                                        ng-required="true" 
+                                                        close-text="Close"
+                                                        ng-change="allMatches.filterByDateRange()"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="allMatches.open($event)">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="input-group">
+                                                    <input 
+                                                        type="text" 
+                                                        class="form-control" 
+                                                        datepicker-popup="{{allMatches.format}}" 
+                                                        ng-model="allMatches.endDate" 
+                                                        is-open="allMatches.opened2" 
+                                                        min-date="minDate" 
+                                                        max-date="'2020-06-22'" 
+                                                        datepicker-options="allMatches.dateOptions" 
+                                                        ng-required="true" 
+                                                        close-text="Close"
+                                                        ng-change="allMatches.filterByDateRange()"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="allMatches.open1($event)">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                        </button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-md-3"><h5><strong>Month Filter:</strong></h5></div>
+                                        <div class="col-md-5">
+                                            <p class="input-group">
+                                                <input  type="text" 
+                                                        show-weeks="false" 
+                                                        show-button-bar="false" 
+                                                        class="form-control" 
+                                                        datepicker-popup="{{allMatches.monthFormat}}" 
+                                                        ng-model="allMatches.monthSelected" 
+                                                        is-open="allMatches.opened3" 
+                                                        min-date="minDate" 
+                                                        max-date="maxDate" 
+                                                        datepicker-options="allMatches.monthPickerOption" 
+                                                        date-disabled="disabled(date, mode)" 
+                                                        ng-required="true" 
+                                                        min-mode="'month'" 
+                                                        max-mode="'month'" 
+                                                        ng-change="allMatches.filterByMonthSelected()"/>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" ng-click="allMatches.openMonthPicker($event)">
+                                                    <i class="glyphicon glyphicon-calendar"></i></button>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/><br/>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-md-3"><h5><strong>Year Filter:</strong></h5></div>
+                                        <form class="form-horizontal">
+                                            <div class="col-md-5">
+                                                <p  class="input-group">
+                                                    <input  type="text" 
+                                                            show-weeks="false" 
+                                                            show-button-bar="false" 
+                                                            class="form-control" 
+                                                            datepicker-popup="{{allMatches.yearFormat}}" 
+                                                            ng-model="allMatches.yearSelected" 
+                                                            is-open="allMatches.opened4" 
+                                                            min-date="minDate" 
+                                                            max-date="maxDate" 
+                                                            datepicker-options="allMatches.yearPickerOption" 
+                                                            date-disabled="disabled(date, mode)" 
+                                                            ng-required="true" 
+                                                            min-mode="'year'" 
+                                                            max-mode="'year'" 
+                                                            popup-placement="top-right"
+                                                            ng-change="allMatches.filterByYearSelected()"/>
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn btn-default" ng-click="allMatches.openYearPicker($event)">
+                                                        <i class="glyphicon glyphicon-calendar"></i></button>
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th ng-show="allMatches.toggle">Match Name</th>
+                            <th ng-show="allMatches.toggle">Match Date</th>
+                            <th ng-show="allMatches.toggle">First Team</th>
+                            <th ng-show="allMatches.toggle">First Team Score</th>
+                            <th ng-show="allMatches.toggle">Second Team</th>
+                            <th ng-show="allMatches.toggle">Second Team Score</th>
+
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="Match Name"  ng-model="search.name"></th>
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="Match Date" ng-model="search.date"></th>
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="First Team" ng-model="search.team1.name"></th>
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="First Team Score" ng-model="search.score1"></th>
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="Second Team" ng-model="search.team2.name"></th>
+                            <th ng-hide="allMatches.toggle"><input type="text" class="form-control" placeholder="Second Team Score" ng-model="search.score2"></th>
+
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="match in allMatches.matchList | filter:searchText | filter:search| itemsPerPage : 100">
+                            <td>{{match.name}}</td>
+                            <td>{{match.date}}</td>
+                            <td>{{match.team1.name}}</td>
+                            <td class="text-center">{{match.score1}}</td>
+                            <td>{{match.team2.name}}</td>
+                            <td class="text-center">{{match.score2}}</td>
+                            <td>
+                                <a style="cursor: pointer;color: #5cb85c;" ng-click="allMatches.singleMatchDetail(match);">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

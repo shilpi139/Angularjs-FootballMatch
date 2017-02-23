@@ -1,0 +1,40 @@
+<div class="container">
+    <h3 class="text-center text-uppercase"><strong>Single Match Detail</strong></h3>
+    <hr>
+    <div class="row">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Detail</h3>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr class="filters">
+                            <th>Match Name</th>
+                            <th>Date</th>
+                            <th>Team1</th>
+                            <th>Team2</th>
+                            <th>Score1</th>
+                            <th>Score2</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{matchDetails.singleMatchDetail.name}}</td>
+                            <td>{{matchDetails.singleMatchDetail.date}}</td>
+                            <td>{{matchDetails.singleMatchDetail.team1.name}}</td>
+                            <td>{{matchDetails.singleMatchDetail.team2.name}}</td>
+                            <td>{{matchDetails.singleMatchDetail.score1}}</td>
+                            <td>{{matchDetails.singleMatchDetail.score2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<ul class="pager">
+    <li class="next">
+        <a href="#/" style="color:#5cb85c!important">Back to Home &rarr;</a>
+    </li>
+</ul>
